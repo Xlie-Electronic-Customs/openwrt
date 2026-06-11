@@ -6,6 +6,9 @@ econet_setup_interfaces()
 	local board="$1"
 
 	case "$board" in
+	keenetic,kn-3810)
+		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3" wan
+		;;
 	*)
 		# econet lacks DSA support now
 		ucidef_set_interface_lan "eth0"
