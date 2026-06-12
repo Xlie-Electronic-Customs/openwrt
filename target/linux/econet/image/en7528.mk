@@ -29,3 +29,16 @@ define Device/dasan_h660gm-a-generic
   DEVICE_DTS := en7528_dasan_h660gm-a-generic
 endef
 TARGET_DEVICES += dasan_h660gm-a-generic
+
+define Device/keenetic_kn-3810
+  DEVICE_VENDOR := Keenetic
+  DEVICE_MODEL := KN-3810
+  DEVICE_PACKAGES := kmod-usb2 kmod-mt7603 econet-eth
+  DEVICE_DTS := en7528_keenetic_kn_3810
+  IMAGES += factory.bin
+  IMAGE/factory.bin := $$(sysupgrade_bin) | \
+        pad-to $$$$(BLOCKSIZE) | \
+        check-size | \
+        zyimage -d 0x803810 -v "KN-3810"
+endef
+TARGET_DEVICES += keenetic_kn-3810
